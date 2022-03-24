@@ -9,12 +9,13 @@ const Users = () => {
     let str2 = 'человека тусанут с тобой сегодня';
 const renderFraze = (n) => {
    let renderNStr = String(n);
-   let countStr = renderNStr.slice(renderNStr.length-1);
-    if (+countStr === 1 || +countStr > 4 && +countStr < 22) {
+    if (+renderNStr === 1 || +renderNStr > 4 && +renderNStr < 22) {
        return str1;
      } else if (+renderNStr === 0){
        return str;
-    } else return str2; 
+    } else {
+      return str2;
+    } 
   };
    let n = users.length; 
    console.log(users)
