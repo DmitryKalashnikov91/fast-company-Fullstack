@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 //import './index.css';
-import Header from './components/header';
 import Users from './components/users';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Header />
+    
     <Users />
   </React.StrictMode>,
   document.getElementById('root')
