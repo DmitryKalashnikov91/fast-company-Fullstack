@@ -38,6 +38,7 @@ const renderFraze = (n) => {
 
     return <>
     {Header()} 
+    {users.length > 0 &&
     <table className="table">
     <thead>
       <tr>
@@ -61,13 +62,14 @@ const renderFraze = (n) => {
           <td>{user.profession.name}</td>
           <td>{user.completedMeetings}</td>
           <td>{user.rate}/5</td>
-          <td><button type="button" className="btn btn-warning" onClick={()=>handleDeleteUser(user._id)}>delete</button></td>
+          <td><button type="button" className="btn btn-danger" onClick={()=>handleDeleteUser(user._id)}>Удалить</button></td>
         </tr>
         )
       )
     }
     </tbody>
-  </table>
+  </table> 
+  }
     </> 
 }
 
