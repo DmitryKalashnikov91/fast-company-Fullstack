@@ -5,7 +5,7 @@ const BookMark = ({status, ...rest}) => {
     
     return (
         <button {...rest}>
-            <i className={"bi bi-award" + (status ? "-award-fill" : "")}>
+            <i className={"bi bi-award" + (status ? "-fill" : "")}>
         </i></button>
     );
 
