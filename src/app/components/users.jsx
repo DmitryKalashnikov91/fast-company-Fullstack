@@ -47,7 +47,7 @@ const Users = ({ users, ...rest }) => {
 };
 
 Users.propTypes = {
-    users: PropTypes.object.isRequired,
+    users: PropTypes.arrayOf(PropTypes.any),
     onDelete: PropTypes.func.isRequired,
     onToggleBookMark: PropTypes.func.isRequired
 };

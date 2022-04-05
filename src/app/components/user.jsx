@@ -47,12 +47,12 @@ const User = ({
 User.propTypes = {
     _id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    qualities: PropTypes.object.isRequired,
+    qualities: PropTypes.arrayOf(PropTypes.any),
     profession: PropTypes.object.isRequired,
     completedMeetings: PropTypes.number.isRequired,
     rate: PropTypes.number.isRequired,
     onDelete: PropTypes.func.isRequired,
-    bookmark: PropTypes.element.isRequired,
+    bookmark: PropTypes.bool.isRequired,
     onToggleBookMark: PropTypes.func.isRequired
 };
 
