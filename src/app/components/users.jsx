@@ -7,10 +7,10 @@ import GroupList from "./groupList";
 // import  professions  from "../api/fake.api/professions.api";
 import api from "../api";
 import SearchStatus from "./searchStatus";
+import { professionsObject } from "../api/fake.api/professions.api";
 
 const Users = ({ users: allUsers, ...rest }) => {
     const pageSize = 4;
-    console.log(allUsers);
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
@@ -40,7 +40,7 @@ const Users = ({ users: allUsers, ...rest }) => {
                 <div className="d-flex flex-column flex-srink-0 p-3">
                     <GroupList
                         selectedItem={selectedProf}
-                        items={professions}
+                        items={professionsObject}
                         onItemSelect={handleProfessionSelect}
                     />
                     <button

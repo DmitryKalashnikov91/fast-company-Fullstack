@@ -19,8 +19,8 @@ const SearchStatus = ({ length }) => {
                 >
                     {length > 0
                         ? `${
-                              length + " " + renderPhrase(length)
-                          } с тобой сегодня`
+                            length + " " + renderPhrase(length)
+                        } с тобой сегодня`
                         : "Никто с тобой не тусанет"}
                 </span>
             </h2>

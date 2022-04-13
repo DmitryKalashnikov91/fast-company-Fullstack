@@ -8,7 +8,6 @@ const GroupList = ({
     onItemSelect,
     selectedItem
 }) => {
-    console.log(typeof (items));
     if (Array.isArray(items)) {
         return (
             <ul className="list-group">
@@ -21,7 +20,7 @@ const GroupList = ({
                         }
                         onClick={() => onItemSelect(item)}
                         role="button"
-                    ></li>
+                    >{item[contentProperty]}</li>
                 ))}
             </ul>
         );
