@@ -6,8 +6,9 @@ function App() {
     const [users, setUsers] = useState();
     useEffect(() => {
         API.users.fetchAll().then((data) => setUsers(data));
-    });
+    }, []);
     const handleDelete = (userId) => {
+        console.log(userId);
         setUsers(users.filter((user) => user._id !== userId));
     };
     const handleToggleBookMark = (id) => {
@@ -17,7 +18,6 @@ function App() {
             )
         );
     };
-    console.log(users);
     return (
         <div>{users &&
             <Users
