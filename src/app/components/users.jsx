@@ -4,10 +4,8 @@ import Pagination from "./pagination";
 import User from "./user";
 import PropTypes from "prop-types";
 import GroupList from "./groupList";
-// import  professions  from "../api/fake.api/professions.api";
 import api from "../api";
 import SearchStatus from "./searchStatus";
-import { professionsObject } from "../api/fake.api/professions.api";
 
 const Users = ({ users: allUsers, ...rest }) => {
     const pageSize = 4;
@@ -27,7 +25,9 @@ const Users = ({ users: allUsers, ...rest }) => {
         api.professions.fetchAll().then((data) => setProfessions(data));
     }, []);
     const filteredUsers = selectedProf
-        ? allUsers.filter((user) => user.profession === selectedProf)
+        ? allUsers.filter((user) =>
+            JSON.stringify(user.profession) ===
+            JSON.stringify(selectedProf))
         : allUsers;
     const count = filteredUsers.length;
     const userCrop = paginate(filteredUsers, currentPage, pageSize);
@@ -40,7 +40,7 @@ const Users = ({ users: allUsers, ...rest }) => {
                 <div className="d-flex flex-column flex-srink-0 p-3">
                     <GroupList
                         selectedItem={selectedProf}
-                        items={professionsObject}
+                        items={professions}
                         onItemSelect={handleProfessionSelect}
                     />
                     <button
