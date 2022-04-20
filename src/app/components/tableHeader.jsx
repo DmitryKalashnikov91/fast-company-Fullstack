@@ -10,16 +10,14 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             onSort({ path: item, order: "asc" });
         }
     };
-    const iconSort = (item) => {
-        if (selectedSort.path === item && selectedSort.order === "asc") {
-            return (
-                <i className="bi bi-caret-up-fill"></i>
-            );
-        } else if (selectedSort.path === item && selectedSort.order === "desc") {
-            return (
-                <i className="bi bi-caret-down-fill"></i>
-            );
-        }
+    const iconSort = (selectedSort, item) => {
+        if (selectedSort.path === item) {
+            if (selectedSort.order === "asc") {
+                return <i className="bi bi-caret-up-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-down-fill"></i>;
+            }
+        } return null;
     };
     return (
         <thead>
@@ -33,7 +31,7 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                         }
                         { ...{ role: columns[column].path && "button" } }
                         scope="col">
-                        {columns[column].name}{iconSort(columns[column].path)}
+                        {columns[column].name} {iconSort(selectedSort, columns[column].path)}
                     </th>
                 ))}
             </tr>
