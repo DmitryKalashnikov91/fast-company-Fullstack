@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
 const TableHeader = ({ onSort, selectedSort, columns }) => {
     const handleSort = (item) => {
@@ -10,12 +9,12 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
             onSort({ path: item, order: "asc" });
         }
     };
-    const iconSort = (selectedSort, item) => {
-        if (selectedSort.path === item) {
+    const iconSort = (selectedSort, currentPath) => {
+        if (selectedSort.path === currentPath) {
             if (selectedSort.order === "asc") {
-                return <i className="bi bi-caret-up-fill"></i>;
-            } else {
                 return <i className="bi bi-caret-down-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-up-fill"></i>;
             }
         } return null;
     };
@@ -29,9 +28,10 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
                             ? () => handleSort(columns[column].path)
                             : undefined
                         }
-                        { ...{ role: columns[column].path && "button" } }
+                        {...{ role: columns[column].path && "button" }}
                         scope="col">
-                        {columns[column].name} {iconSort(selectedSort, columns[column].path)}
+                        {columns[column].name}{" "}
+                        {iconSort(selectedSort, columns[column].path)}
                     </th>
                 ))}
             </tr>
