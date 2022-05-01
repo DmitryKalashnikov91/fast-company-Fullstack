@@ -13,8 +13,23 @@ const UserPage = ({ match, location }) => {
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
     }, []);
-    return (
-        user ? <div><h2>{user.name}</h2><h3>{"Профессия: "}{user.profession.name}</h3><QualitiesList qualities={user.qualities}/><h4>{"Оценка: "}{user.rate}</h4><Link to="/users"><button>Все пользователи</button></Link></div> : "Loading..."
+    return (user
+        ? <div>
+            <h2>
+                {user.name}
+            </h2>
+            <h3>
+                {"Профессия: "}{user.profession.name}
+            </h3>
+            <QualitiesList qualities={user.qualities}/>
+            <h4>
+                {"Оценка: "}{user.rate}
+            </h4>
+            <Link to="/users">
+                <button>Все пользователи</button>
+            </Link>
+        </div>
+        : "Loading..."
     );
 };
 UserPage.propTypes = {
