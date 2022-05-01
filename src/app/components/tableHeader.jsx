@@ -12,9 +12,9 @@ const TableHeader = ({ onSort, selectedSort, columns }) => {
     const iconSort = (selectedSort, currentPath) => {
         if (selectedSort.path === currentPath) {
             if (selectedSort.order === "asc") {
-                return <i className="bi bi-caret-down-fill"></i>;
-            } else {
                 return <i className="bi bi-caret-up-fill"></i>;
+            } else {
+                return <i className="bi bi-caret-down-fill"></i>;
             }
         } return null;
     };

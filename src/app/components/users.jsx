@@ -9,7 +9,7 @@ import UserTable from "./usersTable";
 import _ from "lodash";
 
 const Users = () => {
-    const pageSize = 8;
+    const pageSize = 4;
     const [currentPage, setCurrentPage] = useState(1);
     const [professions, setProfessions] = useState();
     const [selectedProf, setSelectedProf] = useState();
