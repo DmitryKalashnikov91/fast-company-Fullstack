@@ -12,7 +12,7 @@ const UserTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ..
             path: "name",
             name: "Имя",
             component: (user) => (
-                <Link to="/users/:userId">{user.name}</Link>)
+                <Link to={`/users/${user._id}`}>{user.name}</Link>)
         },
         qualities: { name: "Качества", component: (user) => (<QualitiesList qualities={user.qualities}/>) },
         professions: { path: "profession.name", name: "Профессия" },

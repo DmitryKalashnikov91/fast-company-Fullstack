@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import api from "../api";
-import query from "query-string";
+// import query from "query-string";
 import QualitiesList from "./qualitiesList";
 
 const UserPage = ({ match, location }) => {
-    const search = query.parse(location.search);
-    console.log(search);
-    const userId = match.params.userId;
+    // const search = query.parse(location.search);
+    console.log(match);
+    const { userId } = match.params;
     const [user, setUser] = useState();
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
