@@ -15,11 +15,16 @@ const Users = () => {
     const [selectedProf, setSelectedProf] = useState();
     const [sortBy, setSortBy] = useState({ path: "name", order: "asc" });
     const [users, setUsers] = useState();
+    const [search, setSearch] = useState("");
     useEffect(() => {
         api.users.fetchAll().then((data) => setUsers(data));
     }, []);
     const handleDelete = (userId) => {
         setUsers(users.filter((user) => user._id !== userId));
+    };
+    const handleSearch = (s) => {
+        setSearch(s.target.value);
+        console.log(s.target.value);
     };
     const handleToggleBookmark = (id) => {
         const newArray = users.map((user) => {
@@ -80,6 +85,7 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
+                    <input type="text" placeholder="search..." value={search} onChange={handleSearch}/>
                     {count > 0 && (
                         <UserTable
                             users={userCrop}
