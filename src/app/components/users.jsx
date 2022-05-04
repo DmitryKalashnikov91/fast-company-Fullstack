@@ -26,6 +26,8 @@ const Users = () => {
         setSearch(s.target.value);
         console.log(s.target.value);
     };
+    const searchedItem = users ? users.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())) : "...";
+    console.log(searchedItem);
     const handleToggleBookmark = (id) => {
         const newArray = users.map((user) => {
             if (user._id === id) {
