@@ -23,6 +23,7 @@ const Users = () => {
         setUsers(users.filter((user) => user._id !== userId));
     };
     const handleSearch = (s) => {
+        setSelectedProf(undefined);
         setSearch(s.target.value);
         console.log(s.target.value);
     };
@@ -43,9 +44,10 @@ const Users = () => {
 
     useEffect(() => {
         setCurrentPage(1);
-    }, [selectedProf]);
+    }, [selectedProf, search]);
 
     const handleProfessionSelect = (item) => {
+        if (search !== "") setSearch("");
         setSelectedProf(item);
     };
 
@@ -87,7 +89,7 @@ const Users = () => {
                 )}
                 <div className="d-flex flex-column">
                     <SearchStatus length={count} />
-                    <input type="text" placeholder="search..." value={search} onChange={handleSearch}/>
+                    <input type="text" placeholder="search..." name="searchQuery" value={search} onChange={handleSearch}/>
                     {count > 0 && (
                         <UserTable
                             users={userCrop}
