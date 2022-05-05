@@ -56,12 +56,12 @@ const Users = () => {
     const handleSort = (item) => {
         setSortBy(item);
     };
-    if (users) {
+    if (searchedItem && users) {
         const filteredUsers = selectedProf
-            ? users.filter((user) =>
+            ? searchedItem.filter((user) =>
                 JSON.stringify(user.profession) ===
                 JSON.stringify(selectedProf))
-            : users;
+            : searchedItem;
         const count = filteredUsers.length;
         const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order]);
         const userCrop = paginate(sortedUsers, currentPage, pageSize);
