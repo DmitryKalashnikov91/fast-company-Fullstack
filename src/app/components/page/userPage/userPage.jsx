@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import api from "../api";
+import api from "../../../api";
 // import query from "query-string";
-import QualitiesList from "./qualitiesList";
+import Qualities from "../../ui/qualities";
 
-const UserPage = ({ match, location }) => {
-    // const search = query.parse(location.search);
+const UserPage = ({ match }) => {
     console.log(match);
     const { userId } = match.params;
     const [user, setUser] = useState();
@@ -21,7 +20,7 @@ const UserPage = ({ match, location }) => {
             <h3>
                 {"Профессия: "}{user.profession.name}
             </h3>
-            <QualitiesList qualities={user.qualities}/>
+            <Qualities qualities={user.qualities}/>
             <h4>
                 {"Оценка: "}{user.rate}
             </h4>
