@@ -9,6 +9,7 @@ const UserPage = ({ match }) => {
     console.log(match);
     const { userId } = match.params;
     const [user, setUser] = useState();
+    console.log(user);
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
     }, []);
@@ -24,8 +25,8 @@ const UserPage = ({ match }) => {
             <h4>
                 {"Оценка: "}{user.rate}
             </h4>
-            <Link to="/users">
-                <button>Все пользователи</button>
+            <Link to={`/users/${userId}/edit`}>
+                <button>Редактировать</button>
             </Link>
         </div>
         : "Loading..."
