@@ -6,10 +6,8 @@ import api from "../../../api";
 import Qualities from "../../ui/qualities";
 
 const UserPage = ({ match }) => {
-    console.log(match);
     const { userId } = match.params;
     const [user, setUser] = useState();
-    console.log(user);
     useEffect(() => {
         api.users.getById(userId).then((data) => setUser(data));
     }, []);

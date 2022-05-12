@@ -65,6 +65,7 @@ const RegisterForm = () => {
             ...prevState,
             [target.name]: target.value
         }));
+        console.log(data);
     };
     const validatorConfig = {
         email: {
