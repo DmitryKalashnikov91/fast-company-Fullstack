@@ -1,6 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { validator } from "../../../utils/validator";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../../../api";
 import PropTypes from "prop-types";
 import TextField from "../../common/form/textField";
@@ -70,7 +70,7 @@ const EditUserPage = ({ match }) => {
     }, [data]);
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
         const { profession, qualities } = data;
@@ -79,7 +79,11 @@ const EditUserPage = ({ match }) => {
             profession: getProfessionById(profession),
             qualities: getQualities(qualities)
         });
-        api.users.update(userId, data).then(console.log(data.profession));
+        api.users.update({ userId, ...data, profession, qualities }).then(console.log({
+            ...data,
+            profession: getProfessionById(profession),
+            qualities: getQualities(qualities)
+        }));
     };
     const transformData = (data) => {
         return data.map((qual) => ({ label: qual.name, value: qual._id }));
@@ -168,7 +172,7 @@ const EditUserPage = ({ match }) => {
                             onChange={handleDataChange}
                             label="Выберите ваш пол"
                         />
-                        <button className="btn btn-primary w-100 mx-auto" disabled={!isValid}>Сохранить</button>
+                        <Link to={`/users/${userId}`}><button className="btn btn-primary w-100 mx-auto" disabled={!isValid}>Сохранить</button></Link>
                     </form>
                 ) : (
                     "....loading"
