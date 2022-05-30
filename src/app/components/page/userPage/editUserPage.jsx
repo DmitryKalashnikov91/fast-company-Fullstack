@@ -7,6 +7,8 @@ import TextField from "../../common/form/textField";
 import RadioField from "../../common/form/radioField";
 import SelectField from "../../common/form/selectField";
 import MultySelectField from "../../common/form/multySelectField";
+import { useHistory } from "react-router-dom";
+import BackHistoryButton from "../../common/backButton";
 
 const EditUserPage = ({ match }) => {
     const [isLoading, setIsLoading] = useState(false);
@@ -17,6 +19,7 @@ const EditUserPage = ({ match }) => {
         sex: "male",
         qualities: []
     });
+    const history = useHistory();
     const [qualities, setQualities] = useState([]);
     const [professions, setProfession] = useState([]);
     const [errors, setErrors] = useState({});
@@ -70,7 +73,6 @@ const EditUserPage = ({ match }) => {
     }, [data]);
     const isValid = Object.keys(errors).length === 0;
     const handleSubmit = (e) => {
-        e.preventDefault();
         const isValid = validate();
         if (!isValid) return;
         const { profession, qualities } = data;
@@ -79,11 +81,13 @@ const EditUserPage = ({ match }) => {
             profession: getProfessionById(profession),
             qualities: getQualities(qualities)
         });
-        api.users.update({ userId, ...data, profession, qualities }).then(console.log({
-            ...data,
-            profession: getProfessionById(profession),
-            qualities: getQualities(qualities)
-        }));
+        api.users
+            .update(userId, {
+                ...data,
+                profession: getProfessionById(profession),
+                qualities: getQualities(qualities)
+            })
+            .then((data) => history.push(`/users/${data._id}`));
     };
     const transformData = (data) => {
         return data.map((qual) => ({ label: qual.name, value: qual._id }));
@@ -123,8 +127,10 @@ const EditUserPage = ({ match }) => {
             [target.name]: target.value
         }));
     };
+    console.log(professions);
     return (
         <div className="container mt-5">
+            <BackHistoryButton />
             <div className="col-md-6 offset-md-4 shadow p-4">
                 {!isLoading && Object.keys(professions).length > 0 ? (
                     <form onSubmit={handleSubmit}>
@@ -172,9 +178,13 @@ const EditUserPage = ({ match }) => {
                             onChange={handleDataChange}
                             label="Выберите ваш пол"
                         />
-                        {/* <Link to={`/users/${userId}`}> */}
-                        <button className="btn btn-primary w-100 mx-auto" disabled={!isValid}>Сохранить</button>
-                        {/* </Link> */}
+
+                        <button
+                            className="btn btn-primary w-100 mx-auto"
+                            disabled={!isValid}
+                        >
+                            Сохранить
+                        </button>
                     </form>
                 ) : (
                     "....loading"
