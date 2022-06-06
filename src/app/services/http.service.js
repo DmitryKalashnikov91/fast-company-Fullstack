@@ -1,5 +1,4 @@
 import axios from "axios";
-import logger from "./log.service";
 import { toast } from "react-toastify";
 import config from "../config.json";
 
@@ -24,6 +23,6 @@ const httpService = {
     get: axios.get,
     post: axios.post,
     put: axios.put,
-    delete: axios.delete,
+    delete: axios.delete
 };
 export default httpService;
