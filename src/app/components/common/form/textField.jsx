@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 const TextField = ({ label, type, name, value, onChange, error }) => {
     const [showPassword, setShowPassword] = useState(false);
+
     const handleChange = ({ target }) => {
         onChange({ name: target.name, value: target.value });
     };
@@ -19,17 +20,24 @@ const TextField = ({ label, type, name, value, onChange, error }) => {
                 <input
                     type={showPassword ? "text" : type}
                     id={name}
+                    name={name}
                     value={value}
                     onChange={handleChange}
-                    name={name}
                     className={getInputClasses()}
-                />{type === "password" &&
-                <button
-                    className="btn btn-outline-secondary"
-                    type="button"
-                    onClick={toggleShowPassword}
-                >
-                    <i className={"bi bi-eye" + (!showPassword ? "-slash" : "")}></i></button>}
+                />
+                {type === "password" && (
+                    <button
+                        className="btn btn-outline-secondary"
+                        type="button"
+                        onClick={toggleShowPassword}
+                    >
+                        <i
+                            className={
+                                "bi bi-eye" + (showPassword ? "-slash" : "")
+                            }
+                        ></i>
+                    </button>
+                )}
                 {error && <div className="invalid-feedback">{error}</div>}
             </div>
         </div>

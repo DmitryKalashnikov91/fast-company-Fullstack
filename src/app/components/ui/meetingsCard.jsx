@@ -13,7 +13,6 @@ const MeetingsCard = ({ value }) => {
         </div>
     );
 };
-
 MeetingsCard.propTypes = {
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
 };

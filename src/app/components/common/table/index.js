@@ -1,6 +1,7 @@
 import Table from "./table";
 import TableBody from "./tableBody";
 import TableHeader from "./tableHeader";
-export default {
-    Table, TableBody, TableHeader
-};
+
+export default Table;
+
+export { TableBody, TableHeader };

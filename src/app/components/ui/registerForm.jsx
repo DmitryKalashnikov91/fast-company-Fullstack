@@ -4,7 +4,7 @@ import TextField from "../common/form/textField";
 import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
-import MultySelectField from "../common/form/multySelectField";
+import MultiSelectField from "../common/form/multiSelectField";
 import CheckBoxField from "../common/form/checkBoxField";
 
 const RegisterForm = () => {
@@ -65,7 +65,6 @@ const RegisterForm = () => {
             ...prevState,
             [target.name]: target.value
         }));
-        console.log(data);
     };
     const validatorConfig = {
         email: {
@@ -161,7 +160,7 @@ const RegisterForm = () => {
                 onChange={handleChange}
                 label="Выберите ваш пол"
             />
-            <MultySelectField
+            <MultiSelectField
                 options={qualities}
                 onChange={handleChange}
                 defaultValue={data.qualities}
@@ -174,7 +173,7 @@ const RegisterForm = () => {
                 name="licence"
                 error={errors.licence}
             >
-                Подтвердить <a href="#" className="link-primary">лицензионное соглашение</a>
+                Подтвердить <a>лицензионное соглашение</a>
             </CheckBoxField>
             <button
                 className="btn btn-primary w-100 mx-auto"

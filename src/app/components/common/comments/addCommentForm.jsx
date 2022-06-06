@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import API from "../../../api";
-import { validator } from "../../../utils/validator";
 import SelectField from "../form/selectField";
 import TextAreaField from "../form/textAreaField";
+import { validator } from "../../../utils/validator";
 import PropTypes from "prop-types";
 const initialData = { userId: "", content: "" };
 
@@ -19,17 +19,16 @@ const AddCommentForm = ({ onSubmit }) => {
     const validatorConfig = {
         userId: {
             isRequired: {
-                message:
-                    "Выберите, от чьего имени вы хотите отправить сообщение"
+                message: "Выберите от чьего имени вы хотите отправить сообщение"
             }
         },
-
         content: {
             isRequired: {
-                message: "Сообщение не может быть бустым"
+                message: "Сообщение не может быть пустым"
             }
         }
     };
+
     const validate = () => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
@@ -38,7 +37,7 @@ const AddCommentForm = ({ onSubmit }) => {
     useEffect(() => {
         API.users.fetchAll().then(setUsers);
     }, []);
-    const cleanForm = () => {
+    const clearForm = () => {
         setData(initialData);
         setErrors({});
     };
@@ -47,24 +46,23 @@ const AddCommentForm = ({ onSubmit }) => {
         const isValid = validate();
         if (!isValid) return;
         onSubmit(data);
-        cleanForm();
+        clearForm();
     };
     const arrayOfUsers =
         users &&
         Object.keys(users).map((userId) => ({
-            name: users[userId].name,
+            label: users[userId].name,
             value: users[userId]._id
         }));
-    console.log(arrayOfUsers);
     return (
         <div>
-            <h2>New commetnt</h2>
+            <h2>New comment</h2>
             <form onSubmit={handleSubmit}>
                 <SelectField
                     onChange={handleChange}
                     options={arrayOfUsers}
-                    value={data.userId}
                     name="userId"
+                    value={data.userId}
                     defaultOption="Выберите пользователя"
                     error={errors.userId}
                 />
@@ -82,7 +80,6 @@ const AddCommentForm = ({ onSubmit }) => {
         </div>
     );
 };
-
 AddCommentForm.propTypes = {
     onSubmit: PropTypes.func
 };

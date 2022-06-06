@@ -1,18 +1,25 @@
-import { React, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { validator } from "../../utils/validator";
 import TextField from "../common/form/textField";
 import CheckBoxField from "../common/form/checkBoxField";
 
 const LoginForm = () => {
-    const [data, setData] = useState({ email: "", password: "", stayOn: false });
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        stayOn: false
+    });
     const [errors, setErrors] = useState({});
     const handleChange = (target) => {
-        setData((prevState) => ({ ...prevState, [target.name]: target.value }));
+        setData((prevState) => ({
+            ...prevState,
+            [target.name]: target.value
+        }));
     };
     const validatorConfig = {
         email: {
             isRequired: {
-                message: "Эл. почта обязательна для заполнения"
+                message: "Электронная почта обязательна для заполнения"
             },
             isEmail: {
                 message: "Email введен некорректно"
@@ -23,10 +30,10 @@ const LoginForm = () => {
                 message: "Пароль обязателен для заполнения"
             },
             isCapitalSymbol: {
-                message: "Пароль дожен содержать хотя бы одну заглавную букву"
+                message: "Пароль должен содержать хотя бы одну заглавную букву"
             },
             isContainDigit: {
-                message: "Пароль дожен содержать хотя бы одно число"
+                message: "Пароль должен содержать хотя бы одно число"
             },
             min: {
                 message: "Пароль должен состоять минимум из 8 символов",
@@ -43,6 +50,7 @@ const LoginForm = () => {
         return Object.keys(errors).length === 0;
     };
     const isValid = Object.keys(errors).length === 0;
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
@@ -51,10 +59,35 @@ const LoginForm = () => {
     };
     return (
         <form onSubmit={handleSubmit}>
-            <TextField label="Эл. почта" name="email" value={data.email} onChange={handleChange} error={errors.email}/>
-            <TextField label="Пароль" type="password" name="password" value={data.password} onChange={handleChange} error={errors.password}/>
-            <CheckBoxField value={data.stayOn} onChange={handleChange} name="stayOn">Оставаться в системе</CheckBoxField>
-            <button type="submit" disabled={!isValid} className="btn btn-primary w-100 mx-auto">Submit</button>
+            <TextField
+                label="Электронная почта"
+                name="email"
+                value={data.email}
+                onChange={handleChange}
+                error={errors.email}
+            />
+            <TextField
+                label="Пароль"
+                type="password"
+                name="password"
+                value={data.password}
+                onChange={handleChange}
+                error={errors.password}
+            />
+            <CheckBoxField
+                value={data.stayOn}
+                onChange={handleChange}
+                name="stayOn"
+            >
+                Оставаться в системе
+            </CheckBoxField>
+            <button
+                className="btn btn-primary w-100 mx-auto"
+                type="submit"
+                disabled={!isValid}
+            >
+                Submit
+            </button>
         </form>
     );
 };

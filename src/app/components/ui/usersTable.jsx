@@ -1,22 +1,36 @@
 import React from "react";
 import PropTypes from "prop-types";
+
 import BookMark from "../common/bookmark";
 import Qualities from "./qualities";
-import Table from "../common/table/table";
-// import UserPage from "./userPage";
+import Table from "../common/table";
 import { Link } from "react-router-dom";
 
-const UserTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ...rest }) => {
+const UserTable = ({
+    users,
+    onSort,
+    selectedSort,
+    onToggleBookMark,
+    onDelete,
+    ...rest
+}) => {
     const columns = {
         name: {
             path: "name",
             name: "Имя",
             component: (user) => (
-                <Link to={`/users/${user._id}`}>{user.name}</Link>)
+                <Link to={`/users/${user._id}`}>{user.name}</Link>
+            )
         },
-        qualities: { name: "Качества", component: (user) => (<Qualities qualities={user.qualities}/>) },
+        qualities: {
+            name: "Качества",
+            component: (user) => <Qualities qualities={user.qualities} />
+        },
         professions: { path: "profession.name", name: "Профессия" },
-        completedMeetings: { path: "completedMeetings", name: "Встретился, раз" },
+        completedMeetings: {
+            path: "completedMeetings",
+            name: "Встретился, раз"
+        },
         rate: { path: "rate", name: "Оценка" },
         bookmark: {
             path: "bookmark",
@@ -31,10 +45,10 @@ const UserTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ..
         delete: {
             component: (user) => (
                 <button
-                    className="btn btn-warning"
                     onClick={() => onDelete(user._id)}
+                    className="btn btn-danger"
                 >
-            Удалить
+                    delete
                 </button>
             )
         }
@@ -45,8 +59,7 @@ const UserTable = ({ users, onSort, selectedSort, onToggleBookMark, onDelete, ..
             selectedSort={selectedSort}
             columns={columns}
             data={users}
-        >
-        </Table>
+        />
     );
 };
 
@@ -57,4 +70,5 @@ UserTable.propTypes = {
     onToggleBookMark: PropTypes.func.isRequired,
     onDelete: PropTypes.func.isRequired
 };
+
 export default UserTable;
