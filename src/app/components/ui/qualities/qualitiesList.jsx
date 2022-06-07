@@ -8,7 +8,7 @@ const QualitiesList = ({ qualities }) => {
     return (
         <>
             {!isLoading
-                ? qualities.map((qual) => <Quality key={qual._id} {...qual} />)
+                ? qualities.map((qual) => <Quality key={qual} id={qual} />)
                 : "Loading..."}
         </>
     );
