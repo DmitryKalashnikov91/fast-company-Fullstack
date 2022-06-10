@@ -1,31 +1,30 @@
 import React, { useContext, useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import qualitySevice from "../services/quality.service";
 import { toast } from "react-toastify";
+import PropTypes from "prop-types";
+import qualityService from "../services/quality.service";
 
-const QualityContext = React.createContext();
+const QualitiesContext = React.createContext();
 
-export const useQuality = () => {
-    return useContext(QualityContext);
+export const useQualities = () => {
+    return useContext(QualitiesContext);
 };
 
-export const QualityProvider = ({ children }) => {
-    const [isLoading, setLoading] = useState(true);
+export const QualitiesProvider = ({ children }) => {
     const [qualities, setQualities] = useState([]);
     const [error, setError] = useState(null);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function getQualitiesList() {
+        const getQualities = async () => {
             try {
-                const { content } = await qualitySevice.get();
-                console.log(content);
+                const { content } = await qualityService.fetchAll();
                 setQualities(content);
                 setLoading(false);
             } catch (error) {
                 errorCatcher(error);
             }
-        }
-        getQualitiesList();
+        };
+        getQualities();
     }, []);
     const getQuality = (id) => {
         return qualities.find((q) => q._id === id);
@@ -41,14 +40,21 @@ export const QualityProvider = ({ children }) => {
             setError(null);
         }
     }, [error]);
+
     return (
-        <QualityContext.Provider value={{ isLoading, qualities, getQuality }}>
+        <QualitiesContext.Provider
+            value={{
+                qualities,
+                getQuality,
+                isLoading
+            }}
+        >
             {children}
-        </QualityContext.Provider>
+        </QualitiesContext.Provider>
     );
 };
 
-QualityProvider.propTypes = {
+QualitiesProvider.propTypes = {
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
