@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
     const history = useHistory();
+    console.log();
     const { signIn } = useAuth();
     const [data, setData] = useState({
         email: "",
@@ -61,7 +62,11 @@ const LoginForm = () => {
         if (!isValid) return;
         try {
             await signIn(data);
-            history.push("/");
+            history.push(
+                history.location.state
+                    ? history.location.state.from.pathname
+                    : "/"
+            );
         } catch (error) {
             setErrors(error);
         }
