@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import { useAuth } from "./useAuth";
 import { nanoid } from "nanoid";
-import commentSevice from "../services/comment.service";
+import commentService from "../services/comment.service";
 import { toast } from "react-toastify";
 
 const CommentsContext = React.createContext();
@@ -24,7 +24,7 @@ export const CommentsProvider = ({ children }) => {
 
     async function getComments() {
         try {
-            const { content } = await commentSevice.getComments(userId);
+            const { content } = await commentService.getComments(userId);
             setComments(content);
         } catch (error) {
             errorCatcher(error);
@@ -42,12 +42,13 @@ export const CommentsProvider = ({ children }) => {
             userId: currentUser._id
         };
         try {
-            const { content } = await commentSevice.createComment(comment);
+            const { content } = await commentService.createComment(comment);
             setComments((prevState) => [...prevState, content]);
         } catch (error) {
             errorCatcher(error);
         }
         console.log(userId);
+        console.log(comment);
     }
     function errorCatcher(error) {
         const { message } = error.response.data;

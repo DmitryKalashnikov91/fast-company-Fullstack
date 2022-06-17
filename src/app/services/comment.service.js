@@ -2,7 +2,7 @@ import httpService from "./http.service";
 
 const commentEndpoint = "comment/";
 
-const commentSevice = {
+const commentService = {
     createComment: async (payload) => {
         const { data } = await httpService.put(
             commentEndpoint + payload._id,
@@ -21,4 +21,4 @@ const commentSevice = {
     }
 };
 
-export default commentSevice;
+export default commentService;
