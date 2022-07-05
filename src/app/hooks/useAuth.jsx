@@ -7,6 +7,7 @@ import localStorageService, {
     setTokens
 } from "../services/localStorage.service";
 import { useHistory } from "react-router-dom";
+// import httpService from "../services/http.service";
 
 export const httpAuth = axios.create();
 const AuthContext = React.createContext();
@@ -16,7 +17,7 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-    const [currentUser, settUser] = useState();
+    const [currentUser, setUser] = useState();
     const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const history = useHistory();
@@ -47,9 +48,19 @@ const AuthProvider = ({ children }) => {
         }
     }
 
+    async function updateUserData(data) {
+        try {
+            const { content } = await userSevice.update(data);
+            console.log(content);
+            setUser(content);
+        } catch (error) {
+            errorCatcher(error);
+        }
+    }
+
     function logOut() {
         localStorageService.removeAuthData();
-        settUser(null);
+        setUser(null);
         history.push("/");
     }
 
@@ -97,7 +108,7 @@ const AuthProvider = ({ children }) => {
         try {
             const { content } = await userSevice.create(data);
             console.log(content);
-            settUser(content);
+            setUser(content);
         } catch (error) {
             errorCatcher(error);
         }
@@ -110,7 +121,8 @@ const AuthProvider = ({ children }) => {
     async function getUserData() {
         try {
             const { content } = await userSevice.getCurrentUser();
-            settUser(content);
+            setUser(content);
+            console.log(content);
         } catch (error) {
             errorCatcher(error);
         } finally {
@@ -133,7 +145,9 @@ const AuthProvider = ({ children }) => {
     }, [error]);
 
     return (
-        <AuthContext.Provider value={{ signUp, currentUser, signIn, logOut }}>
+        <AuthContext.Provider
+            value={{ signUp, currentUser, signIn, logOut, updateUserData }}
+        >
             {!isLoading ? children : "Loading..."}
         </AuthContext.Provider>
     );
