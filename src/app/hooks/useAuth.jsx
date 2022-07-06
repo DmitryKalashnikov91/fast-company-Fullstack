@@ -51,7 +51,6 @@ const AuthProvider = ({ children }) => {
     async function updateUserData(data) {
         try {
             const { content } = await userSevice.update(data);
-            console.log(content);
             setUser(content);
         } catch (error) {
             errorCatcher(error);
@@ -122,7 +121,6 @@ const AuthProvider = ({ children }) => {
         try {
             const { content } = await userSevice.getCurrentUser();
             setUser(content);
-            console.log(content);
         } catch (error) {
             errorCatcher(error);
         } finally {
